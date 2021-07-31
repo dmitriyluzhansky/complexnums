@@ -144,6 +144,9 @@ class ComplexsNumsCalc
     public static function test_calc()
     {
 
+        //очищаем ошибки если запускаем одновременно с расчетами
+        self::$errors = [];
+
         $num1 = '23+96i';
         $num2 = '35-574i';
 
