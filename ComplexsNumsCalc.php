@@ -122,8 +122,13 @@ class ComplexsNumsCalc
 
     }
 
+
+    //собираем результат вычислений
     private static function return_operation($result_real_part, $result_image_part)
     {
+        $result_real_part = round($result_real_part, 5);
+        $result_image_part = round($result_image_part, 5);
+
         if ($result_image_part == 0) {
             return $result = $result_real_part;
         } elseif ($result_image_part > 0) {
@@ -132,6 +137,40 @@ class ComplexsNumsCalc
             return $result = $result_real_part . $result_image_part . 'i';
         }
 
+    }
+
+
+    //тестируем основные операции
+    public static function test_calc()
+    {
+
+        $num1 = '23+96i';
+        $num2 = '35-574i';
+
+        //образцовые результаты
+        $exemplary_results = ['plus' => '58-478i', 'minus' => '-12+670i', 'multiplication' => '55909-9842i', 'division' => '-0.16419+0.05008i'];
+
+        //результаты тетсирования
+        $test_results = [];
+
+
+        foreach (self::$calc_operations as $operation) {
+
+            $result_operation = self::complex_nums_calculation($num1, $num2, $operation)[1];
+
+            if ($result_operation == $exemplary_results[$operation]) {
+
+                $test_results[$operation] = 'ok';
+
+            } else {
+
+                $test_results[$operation] = 'wrong results';
+
+            }
+
+        }
+
+        return $test_results;
     }
 
 }
